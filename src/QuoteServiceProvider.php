@@ -2,26 +2,24 @@
 
 namespace Rapidez\Quote;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Rapidez\Quote\Listeners\QuoteFormListener;
-use Statamic\Events\FormSubmitted;
+use Rapidez\Quote\Fieldtypes\Products;
 
 class QuoteServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         $this
-            ->bootListeners()
+            ->bootFieldtypes()
             ->bootPublishables()
             ->bootRoutes()
             ->bootTranslations()
             ->bootViews();
     }
 
-    protected function bootListeners(): static
+    protected function bootFieldtypes(): static
     {
-        Event::listen(FormSubmitted::class, QuoteFormListener::class);
+        Products::register();
 
         return $this;
     }
@@ -34,7 +32,8 @@ class QuoteServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/blueprints/forms' => resource_path('blueprints/forms'),
-        ], 'quote-blueprint');
+            __DIR__.'/../resources/views/form_fields' => resource_path('views/form_fields'),
+        ], 'quote-content');
 
         return $this;
     }

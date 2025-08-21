@@ -1,26 +1,15 @@
 <?php
 
-namespace Rapidez\Quote\Listeners;
+namespace Rapidez\Quote\Fieldtypes;
 
 use Illuminate\Support\Arr;
-use Statamic\Events\FormSubmitted;
+use Statamic\Fields\Fieldtype;
 
-class QuoteFormListener
+class Products extends Fieldtype
 {
-    public function handle(FormSubmitted $event): void
+    public function augment($products)
     {
-        if (($event->submission?->form()?->handle() ?? null) !== 'quote_form') {
-            return;
-        }
-
-        $products = $event->submission->get('products');
-
-        if (!$products || !json_validate($products)) {
-            return;
-        }
-
-        $products = collect(json_decode($products, true));
-        
+        $products = json_decode($products);
         $productModel = config('rapidez.models.product');
         /** @var \Rapidez\Core\Models\Product $productInstance */
         $productInstance = new $productModel;
@@ -29,7 +18,7 @@ class QuoteFormListener
             ->get()
             ->keyBy('sku');
 
-        $products = $products->map(function($product) use ($dbProducts) {
+        return $products->map(function($product) use ($dbProducts) {
             $dbProduct = $dbProducts[$product['sku']] ?? null;
             $productOptions = collect($product['options'] ?? [])->mapWithKeys(function (string $optionValue, string $option) use ($dbProduct): array {
                 $option = Arr::firstOrFail($dbProduct->options, fn ($productOption) => $productOption->option_id == $option);
@@ -48,7 +37,5 @@ class QuoteFormListener
                 'options' => $productOptions,
             ];
         });
-        
-        dd($products);
     }
 }
