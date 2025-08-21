@@ -9,7 +9,7 @@ class Products extends Fieldtype
 {
     public function augment($products)
     {
-        $products = json_decode($products);
+        $products = collect(json_decode($products, true));
         $productModel = config('rapidez.models.product');
         /** @var \Rapidez\Core\Models\Product $productInstance */
         $productInstance = new $productModel;
