@@ -6,26 +6,17 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Rapidez\Quote\Listeners\QuoteFormListener;
 use Statamic\Events\FormSubmitted;
-use Statamic\Facades\Blueprint;
 
 class QuoteServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         $this
-            ->bootBlueprints()
             ->bootListeners()
             ->bootPublishables()
             ->bootRoutes()
             ->bootTranslations()
             ->bootViews();
-    }
-
-    protected function bootBlueprints(): static
-    {
-        Blueprint::addNamespace('rapidez-quote', __DIR__ . '/../resources/blueprints');
-
-        return $this;
     }
 
     protected function bootListeners(): static
@@ -43,7 +34,7 @@ class QuoteServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/blueprints/forms' => resource_path('blueprints/forms'),
-        ], 'quote-blueprints');
+        ], 'quote-blueprint');
 
         return $this;
     }
