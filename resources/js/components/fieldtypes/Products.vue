@@ -6,7 +6,7 @@
                     v-if="item.product.thumbnail"
                     class="object-contain h-16 w-20 shrink-0"
                     :alt="item.product.name"
-                    :src="`/storage/resizes/200/magento/catalog/product${item.product.thumbnail}.webp`"
+                    :src="`/storage/${item.store}/resizes/200/magento/catalog/product${item.product.thumbnail}.webp`"
                 />
             </div>
             <div class="flex flex-col">

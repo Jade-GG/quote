@@ -45,6 +45,7 @@ class Products extends Fieldtype
 
             return [
                 ...$product,
+                'store' => config('rapidez.store'),
                 'product' => $dbProduct,
                 'options' => $productOptions,
                 'totalPrice' => $totalPrice,
