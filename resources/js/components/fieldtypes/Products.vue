@@ -28,9 +28,9 @@ export default {
 
     methods: {
         price(value, extra = {}) {
-            return new Intl.NumberFormat(config.locale.replace('_', '-'), {
+            return new Intl.NumberFormat(StatamicConfig.locale.replace('_', '-'), {
                 style: 'currency',
-                currency: config.currency,
+                currency: 'EUR',
                 ...extra,
             }).format(value)
         }
