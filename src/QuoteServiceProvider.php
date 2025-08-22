@@ -4,6 +4,7 @@ namespace Rapidez\Quote;
 
 use Illuminate\Support\ServiceProvider;
 use Rapidez\Quote\Fieldtypes\Products;
+use Statamic\Statamic;
 
 class QuoteServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,8 @@ class QuoteServiceProvider extends ServiceProvider
             ->bootPublishables()
             ->bootRoutes()
             ->bootTranslations()
-            ->bootViews();
+            ->bootViews()
+            ->bootVite();
     }
 
     protected function bootFieldtypes(): static
@@ -55,6 +57,17 @@ class QuoteServiceProvider extends ServiceProvider
     protected function bootViews(): static
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'rapidez-quote');
+
+        return $this;
+    }
+
+    protected function bootVite(): static
+    {
+        Statamic::vite('rapidez-quote', [
+            'hotFile' => 'resources/dist/hot',
+            'buildDirectory' => 'vendor/rapidez-quote/build',
+            'input' => 'resources/cp/cp.js',
+        ]);
 
         return $this;
     }
