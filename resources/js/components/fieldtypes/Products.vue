@@ -1,5 +1,7 @@
 <template>
-    {{ this }}
+    <div>
+        {{ this.value }}
+    </div>
 </template>
 
 <script>

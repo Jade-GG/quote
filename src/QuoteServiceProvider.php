@@ -64,9 +64,8 @@ class QuoteServiceProvider extends ServiceProvider
     protected function bootVite(): static
     {
         Statamic::vite('rapidez-quote', [
-            'hotFile' => 'resources/dist/hot',
             'buildDirectory' => 'vendor/rapidez-quote/build',
-            'input' => 'resources/cp/cp.js',
+            'input' => 'resources/js/cp.js',
         ]);
 
         return $this;
