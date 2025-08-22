@@ -13,6 +13,7 @@ class QuoteServiceProvider extends ServiceProvider
         $this
             ->bootFieldtypes()
             ->bootPublishables()
+            ->bootPublishAfterInstall()
             ->bootRoutes()
             ->bootTranslations()
             ->bootViews()
@@ -36,6 +37,22 @@ class QuoteServiceProvider extends ServiceProvider
             __DIR__.'/../resources/blueprints/forms' => resource_path('blueprints/forms'),
             __DIR__.'/../resources/views/form_fields' => resource_path('views/form_fields'),
         ], 'quote-content');
+
+        $this->publishes([
+            __DIR__ . '/../resources/dist' => public_path('vendor/rapidez-quote'),
+        ], 'quote-dist');
+
+        return $this;
+    }
+
+    protected function bootPublishAfterInstall(): static
+    {
+        Statamic::afterInstalled(function ($command) {
+            $command->call('vendor:publish', [
+                '--tag' => 'quote-dist',
+                '--force' => true,
+            ]);
+        });
 
         return $this;
     }

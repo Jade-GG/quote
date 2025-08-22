@@ -1,6 +1,6 @@
 <template>
-    <div>
-        {{ this.value }}
+    <div class="test">
+        banaan {{ this.value }}
     </div>
 </template>
 
