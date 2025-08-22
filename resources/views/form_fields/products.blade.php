@@ -16,13 +16,13 @@
                             class="object-contain h-16 w-20 shrink-0"
                             :alt="item.name"
                             :src="`/storage/{{ config('rapidez.store') }}/resizes/200/magento/catalog/product${item.thumbnail}.webp`"
-                        >
+                        />
                         <x-rapidez::no-image v-else />
                     </div>
                     <div class="flex flex-col">
                         <span>@{{ quoteData.from(item.sku).qty }} x @{{ item.name }}</span>
                         <template v-for="option in quoteData.from(item.sku).options ?? {}">
-                            <span class="text-muted">@{{ option }}</p>
+                            <span class="text-muted">@{{ option }}</span>
                         </template>
                     </div>
                 </div>

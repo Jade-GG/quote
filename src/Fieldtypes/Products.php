@@ -7,6 +7,11 @@ use Statamic\Fields\Fieldtype;
 
 class Products extends Fieldtype
 {
+    public function preProcess($products)
+    {
+        return $this->augment($products);
+    }
+    
     public function augment($products)
     {
         $products = collect(json_decode($products, true));
