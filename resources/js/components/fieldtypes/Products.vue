@@ -6,11 +6,11 @@
                     v-if="item.product.thumbnail"
                     class="object-contain h-16 w-20 shrink-0"
                     :alt="item.product.name"
-                    :src="`/storage/{{ config('rapidez.store') }}/resizes/200/magento/catalog/product${item.product.thumbnail}.webp`"
+                    :src="`/storage/resizes/200/magento/catalog/product${item.product.thumbnail}.webp`"
                 />
             </div>
             <div class="flex flex-col">
-                <span>{{ item.qty }} x @{{ item.product.name }}</span>
+                <span>{{ item.qty }} x {{ item.product.name }}</span>
                 <template v-for="option in item.options ?? {}">
                     <span class="text-muted">{{ option }}</span>
                 </template>

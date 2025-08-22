@@ -11,14 +11,14 @@ class Products extends Fieldtype
     {
         return $this->augment($products);
     }
-    
+
     public function augment($products)
     {
         $products = collect(json_decode($products, true));
         $productModel = config('rapidez.models.product');
         /** @var \Rapidez\Core\Models\Product $productInstance */
         $productInstance = new $productModel;
-        $dbProducts = $productModel::selectForProductPage()
+        $dbProducts = $productModel::withoutGlobalScopes()
             ->whereIn($productInstance->qualifyColumn('sku'), $products->map(fn($product) => $product['sku']))
             ->get()
             ->keyBy('sku');
