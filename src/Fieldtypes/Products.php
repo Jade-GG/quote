@@ -3,6 +3,8 @@
 namespace Rapidez\Quote\Fieldtypes;
 
 use Illuminate\Support\Arr;
+use Rapidez\Core\Facades\Rapidez;
+use Statamic\Facades\Site;
 use Statamic\Fields\Fieldtype;
 
 class Products extends Fieldtype
@@ -14,6 +16,9 @@ class Products extends Fieldtype
 
     public function augment($products)
     {
+        // Make sure to set the correct Rapidez store before trying to retrieve the products
+        Rapidez::setStore(Site::current()->handle);
+
         $products = collect(json_decode($products, true));
         $productModel = config('rapidez.models.product');
         /** @var \Rapidez\Core\Models\Product $productInstance */
@@ -36,10 +41,13 @@ class Products extends Fieldtype
                 ];
             });
 
+            $totalPrice = ($productOptions->sum('price') + $dbProduct->price) * $product['qty'];
+
             return [
                 ...$product,
                 'product' => $dbProduct,
                 'options' => $productOptions,
+                'totalPrice' => $totalPrice,
             ];
         });
     }

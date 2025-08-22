@@ -82,7 +82,10 @@ class QuoteServiceProvider extends ServiceProvider
     {
         Statamic::vite('rapidez-quote', [
             'buildDirectory' => 'vendor/rapidez-quote/build',
-            'input' => 'resources/js/cp.js',
+            'input' => [
+                'resources/js/cp.js',
+                'resources/css/cp.css',
+            ],
         ]);
 
         return $this;

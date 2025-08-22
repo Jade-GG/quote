@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col *:py-1 divide-y">
         <div v-for="item in value" class="flex gap-5 items-center">
             <div>
                 <img
@@ -15,6 +15,9 @@
                     <span class="text-muted">{{ option }}</span>
                 </template>
             </div>
+            <div class="ml-auto">
+                {{ price(item.totalPrice) }}
+            </div>
         </div>
     </div>
 </template>
@@ -22,5 +25,15 @@
 <script>
 export default {
     mixins: [Fieldtype],
+
+    methods: {
+        price(value, extra = {}) {
+            return new Intl.NumberFormat(config.locale.replace('_', '-'), {
+                style: 'currency',
+                currency: config.currency,
+                ...extra,
+            }).format(value)
+        }
+    },  
 }
 </script>
