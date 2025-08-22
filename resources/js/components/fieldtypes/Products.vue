@@ -8,11 +8,14 @@
                     :alt="item.product.name"
                     :src="`/storage/${item.store}/resizes/200/magento/catalog/product${item.product.thumbnail}.webp`"
                 />
+                <div class="object-contain h-16 w-20 shrink-0 flex items-center justify-center opacity-50" v-else>
+                    No image
+                </div>
             </div>
             <div class="flex flex-col">
                 <span>{{ item.qty }} x {{ item.product.name }}</span>
                 <template v-for="option in item.options ?? {}">
-                    <span class="text-muted">{{ option }}</span>
+                    <span class="opacity-50">{{ option }}</span>
                 </template>
             </div>
             <div class="ml-auto">
