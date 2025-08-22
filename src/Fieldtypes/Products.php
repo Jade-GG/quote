@@ -9,6 +9,9 @@ use Statamic\Fields\Fieldtype;
 
 class Products extends Fieldtype
 {
+    protected $selectable = false;
+    protected $selectableInForms = true;
+    
     public function preProcess($products)
     {
         return $this->augment($products);

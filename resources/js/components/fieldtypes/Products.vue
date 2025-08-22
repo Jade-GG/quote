@@ -17,7 +17,7 @@
                 <template v-for="option in item.options ?? {}">
                     <div class="flex">
                         <span class="opacity-50">{{ option.title }}: {{ option.value }}</span>
-                        <span class="ml-auto opacity-50">+{{ option.price }}</span>
+                        <span class="ml-auto opacity-50">+{{ price(option.price) }}</span>
                     </div>
                 </template>
             </div>
