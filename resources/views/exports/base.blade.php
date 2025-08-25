@@ -42,7 +42,7 @@
     <div style="position:relative">
         <img
             src="data:image/svg+xml;base64,{{ base64_encode(file_get_contents(config('rapidez.quote.logo-path'))) }}"
-            style="position:absolute;top:0;right:0;max-width:300px;height:auto;"
+            style="position:absolute;top:0;right:0;max-width:250px;height:auto;"
             height="100"
         />
         <table>
@@ -63,10 +63,12 @@
                 <td style="height: 8rem">
                     @yield('recipient', '')
                 </td>
-                <td style="width:23rem"></td>
-                <td style="font-size:11px">
-                    <div style="margin-top:3rem"><b>{{ config('app.name') }}</b></div>
-                </td>
+                @hasSection('sender')
+                    <td style="width:23rem"></td>
+                    <td style="font-size:11px">
+                        <div style="margin-top:3rem">@yield('sender', '')</div>
+                    </td>
+                @endif
             </tr>
         </table>
 
