@@ -2,7 +2,8 @@
 
 namespace Rapidez\Quote\Listeners;
 
-use Barryvdh\DomPDF\Facade\Pdf;
+use Rapidez\Core\Facades\Rapidez;
+use Rapidez\Quote\Jobs\SendQuoteJob;
 use Statamic\Events\FormSubmitted;
 
 class QuoteRequestListener
@@ -15,7 +16,8 @@ class QuoteRequestListener
 
         $products = $event->submission->augmentedValue('products')->value();
 
-        return Pdf::loadView('exports.quote', [
+        SendQuoteJob::dispatch([
+            'store' => Rapidez::getStore(config('rapidez.store')),
             'products' => $products,
             'formData' => $event->submission->toArray(),
         ]);
