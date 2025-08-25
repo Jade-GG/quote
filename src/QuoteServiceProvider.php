@@ -77,7 +77,7 @@ class QuoteServiceProvider extends ServiceProvider
 
     protected function bootTranslations(): static
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'rapidez-quote');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../resources/lang');
 
         return $this;
     }

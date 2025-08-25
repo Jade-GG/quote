@@ -47,10 +47,12 @@
         />
         <table>
             <tr>
-                <td class="title font-bold">
-                    <span class="text-primary">&lsqb;</span>
-                    @lang('Quote')
-                    <span class="text-primary">&rsqb;</span>
+                <td>
+                    <b class="title">
+                        <span class="text-primary">&lsqb;</span>
+                        @lang('Quote')
+                        <span class="text-primary">&rsqb;</span>
+                    </b>
                 </td>
                 <td style="font-family:monospace;font-size:12px;padding-left:10px;padding-top:7px">
                     {{ Carbon\Carbon::now(config('app.timezone')) }}</td>
@@ -67,10 +69,19 @@
                 </td>
             </tr>
         </table>
-        <div style="margin-top:2rem;margin-bottom:2rem">
-            @lang('Subject:') @yield('subject', '')
-        </div>
+
+        @hasSection('subject')    
+            <div style="margin-top:2rem;margin-bottom:2rem">
+                @lang('Subject:') @yield('subject', '')
+            </div>
+        @endif
 
         @yield('text', '')
     </div>
+
+    @hasSection('footer')
+        <div style="position:absolute;bottom:0.5rem;left:0;right:0;padding-left:5rem;padding-right:5rem;font-size:10px">
+            @yield('footer', '')
+        </div>
+    @endif
 </body>

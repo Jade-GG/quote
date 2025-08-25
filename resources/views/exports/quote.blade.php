@@ -10,7 +10,7 @@
         @endif
         <div>{{ $formData['address'] }}</div>
         <div>{{ $formData['zipcode'] }} {{ $formData['city'] }}</div>
-        <div>{{ ['NED' => 'Nederland', 'BEL' => 'België'][$formData['country']] ?? $formData['country'] }}</div>
+        <div>{{ __('statamic::dictionary-countries.names.' . $formData['country']) }}</div>
     </b>
     <div>{{ $formData['phone'] }}</div>
 @endsection
@@ -29,6 +29,11 @@
                     <td>{{ price($item['totalPrice']) }}</td>
                 </tr>
             @endforeach
+            <tr>
+                <td><b>@lang('Total (excl. VAT)')</b></td>
+                <td></td>
+                <td><b>{{ price($products->sum('totalPrice')) }}</b></td>
+            </tr>
         </table>
     </div>
 @endsection
