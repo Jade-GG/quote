@@ -2,7 +2,7 @@
     <style>
         @page {
             margin: 0px;
-            --primary: #012169;
+            --primary: {{ config('rapidez.quote.colors.primary') }};
         }
 
         body {
@@ -41,7 +41,7 @@
 <body>
     <div style="position:relative">
         <img
-            src="data:image/svg+xml;base64,{{ base64_encode(file_get_contents(resource_path('svg/logo.svg'))) }}"
+            src="data:image/svg+xml;base64,{{ base64_encode(file_get_contents(config('rapidez.quote.logo-path'))) }}"
             style="position:absolute;top:0;right:0;max-width:300px;height:auto;"
             height="100"
         />

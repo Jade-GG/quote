@@ -11,6 +11,18 @@ use Statamic\Statamic;
 
 class QuoteServiceProvider extends ServiceProvider
 {
+    public function register()
+    {
+        $this->registerConfigs();
+    }
+
+    protected function registerConfigs(): self
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/rapidez/quote.php', 'rapidez.quote');
+
+        return $this;
+    }
+
     public function boot()
     {
         $this
