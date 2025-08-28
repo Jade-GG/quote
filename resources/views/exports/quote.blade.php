@@ -16,7 +16,7 @@
 @endsection
 
 @section('subject')
-    @lang('Quote') | {{ config('app.name') }}
+    @lang('Quote') | {{ Site::current()->name }}
 @endsection
 
 @section('text')

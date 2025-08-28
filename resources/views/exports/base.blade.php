@@ -55,7 +55,8 @@
                     </b>
                 </td>
                 <td style="font-family:monospace;font-size:12px;padding-left:10px;padding-top:7px">
-                    {{ Carbon\Carbon::now(config('app.timezone')) }}</td>
+                    {{ now() }}
+                </td>
             </tr>
         </table>
         <table style="margin-top:1rem">

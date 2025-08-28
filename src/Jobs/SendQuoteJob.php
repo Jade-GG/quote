@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use Rapidez\Core\Facades\Rapidez;
 use Rapidez\Quote\Mail\Quote;
+use Statamic\Facades\Site;
 
 class SendQuoteJob implements ShouldQueue
 {
@@ -19,6 +20,7 @@ class SendQuoteJob implements ShouldQueue
 
     public function handle() {
         Rapidez::setStore($this->quoteData['store']);
+        Site::setCurrent(config('rapidez.store_code'));
 
         $pdf = Pdf::loadView('rapidez-quote::exports.quote', $this->quoteData)
             ->setOption('fontDir', resource_path('/css/fonts'));
