@@ -9,7 +9,7 @@ tabs:
             field:
               input_type: email
               type: text
-              display: E-mailadres
+              display: 'Email address'
               localizable: false
               validate:
                 - required
@@ -18,7 +18,7 @@ tabs:
             handle: first_name
             field:
               type: text
-              display: Voornaam
+              display: 'First name'
               localizable: false
               width: 50
               validate:
@@ -27,7 +27,7 @@ tabs:
             handle: last_name
             field:
               type: text
-              display: Achternaam
+              display: 'Last name'
               localizable: false
               width: 50
               validate:
@@ -36,14 +36,14 @@ tabs:
             handle: company
             field:
               type: text
-              display: Bedrijf
+              display: Company
               localizable: false
               width: 50
           -
             handle: vat_id
             field:
               type: text
-              display: Btw-id
+              display: VAT-id
               localizable: false
               width: 50
           -
@@ -51,7 +51,7 @@ tabs:
             field:
               input_type: tel
               type: text
-              display: Telefoonnummer
+              display: 'Phone number'
               localizable: false
               validate:
                 - required
@@ -62,7 +62,7 @@ tabs:
             handle: zipcode
             field:
               type: text
-              display: Postcode
+              display: Zipcode
               localizable: false
               validate:
                 - required
@@ -70,7 +70,7 @@ tabs:
             handle: address
             field:
               type: text
-              display: Afleveradres
+              display: Address
               localizable: false
               validate:
                 - required
@@ -78,7 +78,7 @@ tabs:
             handle: city
             field:
               type: text
-              display: Stad
+              display: City
               localizable: false
               validate:
                 - required
@@ -89,7 +89,7 @@ tabs:
                 type: countries
                 emojis: true
               type: dictionary
-              display: Land
+              display: Country
               localizable: false
               validate:
                 - required
@@ -100,7 +100,7 @@ tabs:
             handle: products
             field:
               type: textarea
-              display: Producten
+              display: Products
               localizable: false
               validate:
                 - required
@@ -108,5 +108,5 @@ tabs:
             handle: comments
             field:
               type: textarea
-              display: Opmerkingen
+              display: Comments
               localizable: false

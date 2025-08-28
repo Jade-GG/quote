@@ -1,5 +1,11 @@
 {
     "Attached to this email is the quote you requested.": "Bijgevoegd aan deze email is de aangevraagde offerte.",
+    "Comments": "Opmerkingen",
+    "First name": "Voornaam",
+    "Last name": "Achternaam",
+    "Phone number": "Telefoonnummer",
     "Quote": "Offerte",
-    "Subject:": "Betreft:"
+    "Subject:": "Betreft:",
+    "VAT-id": "Btw-id",
+    "Zipcode": "Postcode"
 }
