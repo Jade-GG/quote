@@ -1,5 +1,5 @@
 {
-    "name": "rapidez/quote",
+    "name": "rapidez/statamic-quote",
     "description": "Allows requesting a quote when using Rapidez with Statamic",
     "keywords": [
         "rapidez",
@@ -40,6 +40,10 @@
             "providers": [
                 "Rapidez\\Quote\\QuoteServiceProvider"
             ]
+        },
+        "statamic": {
+            "name": "Rapidez Statamic Quote",
+            "description": "Allows requesting a quote when using Rapidez with Statamic"
         }
     }
 }

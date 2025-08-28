@@ -2,15 +2,34 @@
 
 namespace Rapidez\Quote;
 
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\ServiceProvider;
 use Rapidez\Quote\Fieldtypes\Products;
 use Rapidez\Quote\Listeners\QuoteRequestListener;
 use Statamic\Events\FormSubmitted;
+use Statamic\Providers\AddonServiceProvider;
 use Statamic\Statamic;
 
-class QuoteServiceProvider extends ServiceProvider
+class QuoteServiceProvider extends AddonServiceProvider
 {
+    protected $vite = [
+        'input' => [
+            'resources/js/cp.js',
+            'resources/css/cp.css',
+        ],
+        'buildDirectory' => 'build',
+    ];
+
+    protected $fieldtypes = [
+        Products::class,
+    ];
+
+    protected $listen = [
+        FormSubmitted::class => [
+            QuoteRequestListener::class,
+        ]
+    ];
+
+    protected $viewNamespace = 'rapidez-quote';
+
     public function register()
     {
         $this->registerConfigs();
@@ -19,33 +38,6 @@ class QuoteServiceProvider extends ServiceProvider
     protected function registerConfigs(): self
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/rapidez/quote.php', 'rapidez.quote');
-
-        return $this;
-    }
-
-    public function boot()
-    {
-        $this
-            ->bootFieldtypes()
-            ->bootListeners()
-            ->bootPublishables()
-            ->bootPublishAfterInstall()
-            ->bootRoutes()
-            ->bootTranslations()
-            ->bootViews()
-            ->bootVite();
-    }
-
-    protected function bootFieldtypes(): static
-    {
-        Products::register();
-
-        return $this;
-    }
-
-    protected function bootListeners(): static
-    {
-        Event::listen(FormSubmitted::class, QuoteRequestListener::class);
 
         return $this;
     }
@@ -62,7 +54,7 @@ class QuoteServiceProvider extends ServiceProvider
         ], 'quote-content');
 
         $this->publishes([
-            __DIR__ . '/../resources/dist' => public_path('vendor/rapidez-quote'),
+            __DIR__ . '/../resources/dist' => public_path('vendor/statamic-quote'),
         ], 'quote-dist');
 
         return $this;
@@ -80,13 +72,6 @@ class QuoteServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function bootRoutes(): static
-    {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-
-        return $this;
-    }
-
     protected function bootTranslations(): static
     {
         $this->loadJsonTranslationsFrom(__DIR__ . '/../resources/lang');
@@ -94,22 +79,9 @@ class QuoteServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function bootViews(): static
+    protected function bootRoutes(): static
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'rapidez-quote');
-
-        return $this;
-    }
-
-    protected function bootVite(): static
-    {
-        Statamic::vite('rapidez-quote', [
-            'buildDirectory' => 'vendor/rapidez-quote/build',
-            'input' => [
-                'resources/js/cp.js',
-                'resources/css/cp.css',
-            ],
-        ]);
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         return $this;
     }
