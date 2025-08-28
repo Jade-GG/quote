@@ -49,7 +49,7 @@ export default {
             }
         },
 
-        from(sku) {
+        getBySku(sku) {
             return this.products.find(product => product.sku === sku)
         }
     },

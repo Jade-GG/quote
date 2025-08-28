@@ -20,8 +20,8 @@
                         <x-rapidez::no-image v-else />
                     </div>
                     <div class="flex flex-col">
-                        <span>@{{ quoteData.from(item.sku).qty }} x @{{ item.name }}</span>
-                        <template v-for="option in quoteData.from(item.sku).options ?? {}">
+                        <span>@{{ quoteData.getBySku(item.sku).qty }} x @{{ item.name }}</span>
+                        <template v-for="option in quoteData.getBySku(item.sku).options ?? {}">
                             <span class="text-muted">@{{ option }}</span>
                         </template>
                     </div>
